@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 public class CatalogoGiochi {
     private final List<Gioco> giochi;
@@ -21,7 +22,7 @@ public class CatalogoGiochi {
         return new Videogioco[]{
                 new Videogioco("VG01", "The Legend of Zelda, Link's Awakening", 1993, 40.0, "Nintendo", 15, Genere.GDR),
                 new Videogioco("VG02", "Final Fantasy VII", 1997, 50.0, "PlayStation", 40, Genere.GDR),
-                new Videogioco("VG03", "Elden Ring", 2022, 60.0, "Multi-platform", 100, Genere.SOULSLIKE)
+                new Videogioco("VG03", "Elden Ring", 2022, 60.0, "Multi-platform", 120, Genere.SOULSLIKE)
         };
     }
 
@@ -54,9 +55,9 @@ public class CatalogoGiochi {
 
     // Ricerca per numero di giocatori (solo giochi da tavolo)
     public List<GiocoDaTavolo> cercaPerNumeroGiocatori(int numeroGiocatori) {
-        System.out.println("Numero massimo di giocatori inserito: " + numeroGiocatori);  // Debug
+        System.out.println("Numero massimo di giocatori inserito: " + numeroGiocatori);
         return Arrays.stream(getGiochiDaTavolo())
-                .filter(g -> g.getNumeroGiocatori() >= numeroGiocatori)  // Modifica il filtro per includere giochi con numero giocatori >= numero inserito
+                .filter(g -> g.getNumeroGiocatori() >= numeroGiocatori)
                 .collect(Collectors.toList());
     }
 
@@ -87,5 +88,22 @@ public class CatalogoGiochi {
     // Metodo per stampare la collezione
     public void stampaCollezione() {
         giochi.forEach(Gioco::schedaProdotto);
+        Optional<Gioco> giocoPrezzoMax = giochi.stream()
+                .max(Comparator.comparingDouble(Gioco::getPrezzo));
+
+        // Stampa il gioco con il prezzo più alto
+        if (giocoPrezzoMax.isPresent()) {
+            System.out.println("\nGioco con il prezzo più alto:");
+            giocoPrezzoMax.get().schedaProdotto();
+        }
+
+        // Calcola la media dei prezzi
+        double mediaPrezzi = giochi.stream()
+                .mapToDouble(Gioco::getPrezzo)
+                .average()
+                .orElse(0.0);
+
+        // Stampa la media dei prezzi
+        System.out.printf("\nPrezzo medio dei giochi: %.2f€\n", mediaPrezzi);
     }
 }

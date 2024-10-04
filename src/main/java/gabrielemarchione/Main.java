@@ -69,15 +69,30 @@ public class Main {
 
                 case 3:
                     System.out.print("Inserisci il prezzo massimo: ");
-                    double prezzoCerca = scanner.nextDouble();
-                    collezione.cercaPerPrezzo(prezzoCerca).forEach(Gioco::schedaProdotto);
+                    if (scanner.hasNextDouble()) {
+                        double prezzoMax = scanner.nextDouble();
+                        scanner.nextLine();
+                     collezione.cercaPerPrezzo(prezzoMax).forEach(Gioco::schedaProdotto);
+                    } else {
+                        System.out.println("Errore: devi inserire un numero valido.");
+                        scanner.next();
+                    }
                     break;
 
-                case 4: // Cerca giochi da tavolo per numero massimo di giocatori
+
+                case 4:
                     System.out.print("Inserisci il numero massimo di giocatori: ");
-                    int numeroGiocatori = scanner.nextInt();
-                    collezione.cercaPerNumeroGiocatori(numeroGiocatori)
-                            .forEach(GiocoDaTavolo::schedaProdotto);
+                    if (scanner.hasNextInt()) {
+                        int numeroGiocatori = scanner.nextInt();
+                        scanner.nextLine();
+
+                        // Cerca i giochi da tavolo con un numero di giocatori <= numeroGiocatori
+              collezione.cercaPerNumeroGiocatori(numeroGiocatori)
+                                .forEach(GiocoDaTavolo::schedaProdotto);
+                    } else {
+                        System.out.println("Errore: devi inserire un numero valido.");
+                        scanner.next();  // Consuma l'input non valido
+                    }
                     break;
 
 
