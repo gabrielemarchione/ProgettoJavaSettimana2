@@ -1,9 +1,9 @@
 package gabrielemarchione;
 
 public class Videogioco extends Gioco {
-    private String piattaforma;
-    private int durataGioco;
-    private Genere genere;
+    private final String piattaforma;
+    private final int durataGioco;
+    private final Genere genere;
 
     public Videogioco(String idGioco, String titolo, int annoPubblicazione, double prezzo, String piattaforma, int durataGioco, Genere genere) {
         super(idGioco, titolo, annoPubblicazione, prezzo);
