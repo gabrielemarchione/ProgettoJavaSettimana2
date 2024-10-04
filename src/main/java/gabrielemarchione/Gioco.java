@@ -29,6 +29,5 @@ public abstract class Gioco {
         return prezzo;
     }
 
-    // Metodo astratto che verrà implementato nelle classi derivate
     public abstract void schedaProdotto();
 }

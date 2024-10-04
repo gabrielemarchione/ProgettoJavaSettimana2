@@ -12,17 +12,6 @@ public class Videogioco extends Gioco {
         this.genere = genere;
     }
 
-    public String getPiattaforma() {
-        return piattaforma;
-    }
-
-    public int getDurataGioco() {
-        return durataGioco;
-    }
-
-    public Genere getGenere() {
-        return genere;
-    }
 
     @Override
     public void schedaProdotto() {
